@@ -44,10 +44,13 @@ on:
     - cron: '30 0 22 6 *'  # 🇳🇿 Nueva Zelanda vs Egipto 🇪🇬 · 03:00h
     - cron: '30 2 27 6 *'  # 🇳🇿 Nueva Zelanda vs Bélgica 🇧🇪 · 05:00h
     - cron: '30 2 27 6 *'  # 🇪🇬 Egipto vs Irán 🇮🇷 · 05:00h
+    - cron: '0 16 14 6 *'   # 🇪🇸 España vs Cabo Verde 🇨🇻 · AVISO 24H ANTES
     - cron: '30 15 15 6 *'  # 🇪🇸 España vs Cabo Verde 🇨🇻 · 18:00h
     - cron: '30 21 15 6 *'  # 🇸🇦 Arabia Saudí vs Uruguay 🇺🇾 · 00:00h
+    - cron: '0 16 20 6 *'   # 🇪🇸 España vs Arabia Saudí 🇸🇦 · AVISO 24H ANTES
     - cron: '30 15 21 6 *'  # 🇪🇸 España vs Arabia Saudí 🇸🇦 · 18:00h
     - cron: '30 21 21 6 *'  # 🇺🇾 Uruguay vs Cabo Verde 🇨🇻 · 00:00h
+    - cron: '0 0 26 6 *'    # 🇺🇾 Uruguay vs España 🇪🇸 · AVISO 24H ANTES
     - cron: '30 23 26 6 *'  # 🇺🇾 Uruguay vs España 🇪🇸 · 02:00h
     - cron: '30 23 26 6 *'  # 🇨🇻 Cabo Verde vs Arabia Saudí 🇸🇦 · 02:00h
     - cron: '30 18 16 6 *'  # 🇫🇷 Francia vs Senegal 🇸🇳 · 21:00h
@@ -121,7 +124,7 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           python3 - <<'EOF'
-import os, urllib.request, urllib.parse, json, subprocess
+import os, urllib.request, urllib.parse, json
 from datetime import datetime, timezone, timedelta
 
 TOKEN   = os.environ['TELEGRAM_TOKEN']
@@ -237,9 +240,19 @@ PARTIDOS = [
 
 now = datetime.now(timezone.utc)
 match = None
+aviso_24h = False
+
 for m,d,h,mi,local,visit,fl,fv,hora_es,fecha,grupo,canal,espana in PARTIDOS:
-    if now.month==m and now.day==d and abs((now.hour*60+now.minute)-(h*60+mi))<=35:
-        match=(local,visit,fl,fv,hora_es,fecha,grupo,canal,espana)
+    match_dt = datetime(now.year, m, d, h, mi, tzinfo=timezone.utc)
+    delta = (match_dt - now).total_seconds() / 60  # minutos hasta el partido
+
+    if 5 <= delta <= 65:  # ventana 30 minutos antes
+        match = (local,visit,fl,fv,hora_es,fecha,grupo,canal,espana)
+        aviso_24h = False
+        break
+    elif espana and 23*60+25 <= delta <= 24*60+35:  # ventana 24h antes (solo España)
+        match = (local,visit,fl,fv,hora_es,fecha,grupo,canal,espana)
+        aviso_24h = True
         break
 
 if not match:
@@ -247,12 +260,25 @@ if not match:
     exit(0)
 
 local,visit,fl,fv,hora_es,fecha,grupo,canal,espana = match
-espana_line = '\n🇪🇸 <b>¡PARTIDO DE ESPAÑA!</b>' if espana else ''
 if visit == '—':
     titulo = f'⚽ {local}'
 else:
     titulo = f'⚽ {fl} {local}  vs  {fv} {visit}'
-msg = f'''🏆 <b>Mundial 2026</b>{espana_line}
+
+if aviso_24h:
+    msg = f'''🏆 <b>Mundial 2026</b>
+🇪🇸 <b>¡MAÑANA JUEGA ESPAÑA!</b>
+
+{titulo}
+
+🕐 Mañana a las <b>{hora_es}h</b> (hora española)
+📺 Canal: <b>{canal}</b>
+📅 {fecha} · Grupo {grupo}
+
+¡Prepárate! 🔥'''
+else:
+    espana_line = '\n🇪🇸 <b>¡PARTIDO DE ESPAÑA!</b>' if espana else ''
+    msg = f'''🏆 <b>Mundial 2026</b>{espana_line}
 
 {titulo}
 
