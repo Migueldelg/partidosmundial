@@ -101,6 +101,8 @@ on:
 
     - cron: '0 19 10 6 *'   # Inauguración — aviso día antes 21:00h española
 
+    - cron: '57 17 2 6 *'  # TEST — simulación primer partido
+
   workflow_dispatch:
 
 jobs:
@@ -122,6 +124,7 @@ jobs:
           CHAT_ID = os.environ['TELEGRAM_CHAT_ID']
 
           PARTIDOS = [
+            (6,2,18,27,'México','Sudáfrica','🇲🇽','🇿🇦','21:00','11 de junio','A','DAZN',False),  # TEST — borrar después
             (6,11,19,0,'México','Sudáfrica','🇲🇽','🇿🇦','21:00','11 de junio','A','DAZN',False),
             (6,12,2,0,'Corea del Sur','Rep. Checa','🇰🇷','🇨🇿','04:00','12 de junio','A','DAZN',False),
             (6,18,16,0,'Rep. Checa','Sudáfrica','🇨🇿','🇿🇦','18:00','18 de junio','A','DAZN',False),
