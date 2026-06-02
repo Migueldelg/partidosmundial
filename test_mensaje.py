@@ -11,7 +11,29 @@ with open(".env") as f:
 TOKEN   = os.environ["TELEGRAM_TOKEN"]
 CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
 
-msg = """🏆 <b>Mundial 2026</b>
+def send(text):
+    url  = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
+    data = urllib.parse.urlencode({"chat_id": CHAT_ID, "text": text, "parse_mode": "HTML"}).encode()
+    req  = urllib.request.Request(url, data=data, method="POST")
+    with urllib.request.urlopen(req) as r:
+        resp = json.loads(r.read())
+    return resp.get("ok")
+
+mensajes = [
+    # 1. Aviso 24h antes — España
+    ("""🏆 <b>Mundial 2026</b>
+🇪🇸 <b>¡MAÑANA JUEGA ESPAÑA!</b>
+
+⚽ 🇪🇸 España  vs  🇸🇦 Arabia Saudí
+
+🕐 Mañana a las <b>18:00h</b> (hora española)
+📺 Canal: <b>La 1</b>
+📅 21 de junio · Grupo H
+
+<b>¡Prepárate! 🔥</b>""", "Aviso 24h — España"),
+
+    # 2. Aviso 30min antes — España
+    ("""🏆 <b>Mundial 2026</b>
 🇪🇸 <b>¡PARTIDO DE ESPAÑA!</b>
 
 ⚽ 🇪🇸 España  vs  🇸🇦 Arabia Saudí
@@ -20,11 +42,20 @@ msg = """🏆 <b>Mundial 2026</b>
 📺 Canal: <b>La 1</b>
 📅 21 de junio · Grupo H
 
-¡Empieza en 30 minutos! 🔥"""
+<b>¡Empieza en 30 minutos! 🔥</b>""", "Aviso 30min — España"),
 
-url  = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
-data = urllib.parse.urlencode({"chat_id": CHAT_ID, "text": msg, "parse_mode": "HTML"}).encode()
-req  = urllib.request.Request(url, data=data, method="POST")
-with urllib.request.urlopen(req) as r:
-    resp = json.loads(r.read())
-print("✅ Enviado!" if resp.get("ok") else resp)
+    # 3. Aviso 30min antes — otro partido
+    ("""🏆 <b>Mundial 2026</b>
+
+⚽ 🇧🇷 Brasil  vs  🇲🇦 Marruecos
+
+🕐 Hoy a las <b>00:00h</b> (hora española)
+📺 Canal: <b>La 1</b>
+📅 14 de junio · Grupo C
+
+<b>¡Empieza en 30 minutos! 🔥</b>""", "Aviso 30min — Brasil vs Marruecos"),
+]
+
+for msg, nombre in mensajes:
+    ok = send(msg)
+    print(f"{'✅' if ok else '❌'} {nombre}")
