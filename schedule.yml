@@ -1,0 +1,271 @@
+name: Mundial 2026 — Alertas Telegram
+
+on:
+  schedule:
+    - cron: '30 18 11 6 *'  # 🇲🇽 México vs Sudáfrica 🇿🇦 · 21:00h
+    - cron: '30 1 12 6 *'  # 🇰🇷 Corea del Sur vs Rep. Checa 🇨🇿 · 04:00h
+    - cron: '30 15 18 6 *'  # 🇨🇿 Rep. Checa vs Sudáfrica 🇿🇦 · 18:00h
+    - cron: '30 0 19 6 *'  # 🇲🇽 México vs Corea del Sur 🇰🇷 · 03:00h
+    - cron: '30 0 25 6 *'  # 🇨🇿 Rep. Checa vs México 🇲🇽 · 03:00h
+    - cron: '30 0 25 6 *'  # 🇿🇦 Sudáfrica vs Corea del Sur 🇰🇷 · 03:00h
+    - cron: '30 18 12 6 *'  # 🇨🇦 Canadá vs Bosnia 🇧🇦 · 21:00h
+    - cron: '30 18 13 6 *'  # 🇶🇦 Catar vs Suiza 🇨🇭 · 21:00h
+    - cron: '30 18 18 6 *'  # 🇨🇭 Suiza vs Bosnia 🇧🇦 · 21:00h
+    - cron: '30 21 18 6 *'  # 🇨🇦 Canadá vs Catar 🇶🇦 · 00:00h
+    - cron: '30 18 24 6 *'  # 🇨🇭 Suiza vs Canadá 🇨🇦 · 21:00h
+    - cron: '30 18 24 6 *'  # 🇧🇦 Bosnia vs Catar 🇶🇦 · 21:00h
+    - cron: '30 21 13 6 *'  # 🇧🇷 Brasil vs Marruecos 🇲🇦 · 00:00h
+    - cron: '30 0 14 6 *'  # 🇭🇹 Haití vs Escocia 🏴󠁧󠁢󠁳󠁣󠁴󠁿 · 03:00h
+    - cron: '30 21 19 6 *'  # 🇧🇷 Brasil vs Haití 🇭🇹 · 00:00h
+    - cron: '30 0 20 6 *'  # 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia vs Marruecos 🇲🇦 · 03:00h
+    - cron: '30 21 24 6 *'  # 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia vs Brasil 🇧🇷 · 00:00h
+    - cron: '30 21 24 6 *'  # 🇲🇦 Marruecos vs Haití 🇭🇹 · 00:00h
+    - cron: '30 0 13 6 *'  # 🇺🇸 EE.UU. vs Paraguay 🇵🇾 · 03:00h
+    - cron: '30 3 13 6 *'  # 🇦🇺 Australia vs Turquía 🇹🇷 · 06:00h
+    - cron: '30 3 19 6 *'  # 🇹🇷 Turquía vs Paraguay 🇵🇾 · 06:00h
+    - cron: '30 18 19 6 *'  # 🇺🇸 EE.UU. vs Australia 🇦🇺 · 21:00h
+    - cron: '30 1 26 6 *'  # 🇹🇷 Turquía vs EE.UU. 🇺🇸 · 04:00h
+    - cron: '30 1 26 6 *'  # 🇵🇾 Paraguay vs Australia 🇦🇺 · 04:00h
+    - cron: '30 16 14 6 *'  # 🇩🇪 Alemania vs Curazao 🇨🇼 · 19:00h
+    - cron: '30 22 14 6 *'  # 🇨🇮 C. de Marfil vs Ecuador 🇪🇨 · 01:00h
+    - cron: '30 21 20 6 *'  # 🇩🇪 Alemania vs C. de Marfil 🇨🇮 · 00:00h
+    - cron: '30 23 20 6 *'  # 🇪🇨 Ecuador vs Curazao 🇨🇼 · 02:00h
+    - cron: '30 21 25 6 *'  # 🇪🇨 Ecuador vs Alemania 🇩🇪 · 00:00h
+    - cron: '30 21 25 6 *'  # 🇨🇼 Curazao vs C. de Marfil 🇨🇮 · 00:00h
+    - cron: '30 21 14 6 *'  # 🇳🇱 Países Bajos vs Japón 🇯🇵 · 00:00h
+    - cron: '30 1 15 6 *'  # 🇸🇪 Suecia vs Túnez 🇹🇳 · 04:00h
+    - cron: '30 16 20 6 *'  # 🇳🇱 Países Bajos vs Suecia 🇸🇪 · 19:00h
+    - cron: '30 3 20 6 *'  # 🇹🇳 Túnez vs Japón 🇯🇵 · 06:00h
+    - cron: '30 22 25 6 *'  # 🇹🇳 Túnez vs Países Bajos 🇳🇱 · 01:00h
+    - cron: '30 22 25 6 *'  # 🇯🇵 Japón vs Suecia 🇸🇪 · 01:00h
+    - cron: '30 18 15 6 *'  # 🇧🇪 Bélgica vs Egipto 🇪🇬 · 21:00h
+    - cron: '30 0 16 6 *'  # 🇮🇷 Irán vs Nueva Zelanda 🇳🇿 · 03:00h
+    - cron: '30 22 21 6 *'  # 🇧🇪 Bélgica vs Irán 🇮🇷 · 01:00h
+    - cron: '30 0 22 6 *'  # 🇳🇿 Nueva Zelanda vs Egipto 🇪🇬 · 03:00h
+    - cron: '30 2 27 6 *'  # 🇳🇿 Nueva Zelanda vs Bélgica 🇧🇪 · 05:00h
+    - cron: '30 2 27 6 *'  # 🇪🇬 Egipto vs Irán 🇮🇷 · 05:00h
+    - cron: '30 15 15 6 *'  # 🇪🇸 España vs Cabo Verde 🇨🇻 · 18:00h
+    - cron: '30 21 15 6 *'  # 🇸🇦 Arabia Saudí vs Uruguay 🇺🇾 · 00:00h
+    - cron: '30 15 21 6 *'  # 🇪🇸 España vs Arabia Saudí 🇸🇦 · 18:00h
+    - cron: '30 21 21 6 *'  # 🇺🇾 Uruguay vs Cabo Verde 🇨🇻 · 00:00h
+    - cron: '30 23 26 6 *'  # 🇺🇾 Uruguay vs España 🇪🇸 · 02:00h
+    - cron: '30 23 26 6 *'  # 🇨🇻 Cabo Verde vs Arabia Saudí 🇸🇦 · 02:00h
+    - cron: '30 18 16 6 *'  # 🇫🇷 Francia vs Senegal 🇸🇳 · 21:00h
+    - cron: '30 21 16 6 *'  # 🇮🇶 Irak vs Noruega 🇳🇴 · 00:00h
+    - cron: '30 20 22 6 *'  # 🇫🇷 Francia vs Irak 🇮🇶 · 23:00h
+    - cron: '30 23 22 6 *'  # 🇳🇴 Noruega vs Senegal 🇸🇳 · 02:00h
+    - cron: '30 18 26 6 *'  # 🇳🇴 Noruega vs Francia 🇫🇷 · 21:00h
+    - cron: '30 18 26 6 *'  # 🇸🇳 Senegal vs Irak 🇮🇶 · 21:00h
+    - cron: '30 0 17 6 *'  # 🇦🇷 Argentina vs Argelia 🇩🇿 · 03:00h
+    - cron: '30 3 17 6 *'  # 🇦🇹 Austria vs Jordania 🇯🇴 · 06:00h
+    - cron: '30 16 22 6 *'  # 🇦🇷 Argentina vs Austria 🇦🇹 · 19:00h
+    - cron: '30 2 23 6 *'  # 🇯🇴 Jordania vs Argelia 🇩🇿 · 05:00h
+    - cron: '30 1 28 6 *'  # 🇯🇴 Jordania vs Argentina 🇦🇷 · 04:00h
+    - cron: '30 1 28 6 *'  # 🇩🇿 Argelia vs Austria 🇦🇹 · 04:00h
+    - cron: '30 16 17 6 *'  # 🇵🇹 Portugal vs RD Congo 🇨🇩 · 19:00h
+    - cron: '30 1 18 6 *'  # 🇺🇿 Uzbekistán vs Colombia 🇨🇴 · 04:00h
+    - cron: '30 16 23 6 *'  # 🇵🇹 Portugal vs Uzbekistán 🇺🇿 · 19:00h
+    - cron: '30 1 24 6 *'  # 🇨🇴 Colombia vs RD Congo 🇨🇩 · 04:00h
+    - cron: '0 23 27 6 *'  # 🇨🇴 Colombia vs Portugal 🇵🇹 · 01:30h
+    - cron: '0 23 27 6 *'  # 🇨🇩 RD Congo vs Uzbekistán 🇺🇿 · 01:30h
+    - cron: '30 19 17 6 *'  # 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra vs Croacia 🇭🇷 · 22:00h
+    - cron: '30 22 17 6 *'  # 🇬🇭 Ghana vs Panamá 🇵🇦 · 01:00h
+    - cron: '30 19 23 6 *'  # 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra vs Ghana 🇬🇭 · 22:00h
+    - cron: '30 22 23 6 *'  # 🇵🇦 Panamá vs Croacia 🇭🇷 · 01:00h
+    - cron: '30 20 27 6 *'  # 🇭🇷 Croacia vs Inglaterra 🏴󠁧󠁢󠁥󠁮󠁧󠁿 · 23:00h
+    - cron: '30 20 27 6 *'  # 🇵🇦 Panamá vs Ghana 🇬🇭 · 23:00h
+    - cron: '30 16 29 6 *'  # Dieciseisavos partido 1 · 19:00h
+    - cron: '30 19 29 6 *'  # Dieciseisavos partido 2 · 22:00h
+    - cron: '30 22 29 6 *'  # Dieciseisavos partido 3 · 01:00h
+    - cron: '30 19 30 6 *'  # Dieciseisavos partido 4 · 22:00h
+    - cron: '30 22 30 6 *'  # Dieciseisavos partido 5 · 01:00h
+    - cron: '30 16 1 7 *'  # Dieciseisavos partido 6 · 19:00h
+    - cron: '30 19 1 7 *'  # Dieciseisavos partido 7 · 22:00h
+    - cron: '30 22 1 7 *'  # Dieciseisavos partido 8 · 01:00h
+    - cron: '30 16 2 7 *'  # Dieciseisavos partido 9 · 19:00h
+    - cron: '30 19 2 7 *'  # Dieciseisavos partido 10 · 22:00h
+    - cron: '30 22 2 7 *'  # Dieciseisavos partido 11 · 01:00h
+    - cron: '30 16 3 7 *'  # Dieciseisavos partido 12 · 19:00h
+    - cron: '30 19 3 7 *'  # Dieciseisavos partido 13 · 22:00h
+    - cron: '30 22 3 7 *'  # Dieciseisavos partido 14 · 01:00h
+    - cron: '30 16 4 7 *'  # Dieciseisavos partido 15 · 19:00h
+    - cron: '30 19 4 7 *'  # Dieciseisavos partido 16 · 22:00h
+    - cron: '30 19 5 7 *'  # Octavos partido 1 · 22:00h
+    - cron: '30 22 5 7 *'  # Octavos partido 2 · 01:00h
+    - cron: '30 16 6 7 *'  # Octavos partido 3 · 19:00h
+    - cron: '30 19 6 7 *'  # Octavos partido 4 · 22:00h
+    - cron: '30 22 6 7 *'  # Octavos partido 5 · 01:00h
+    - cron: '30 16 7 7 *'  # Octavos partido 6 · 19:00h
+    - cron: '30 19 7 7 *'  # Octavos partido 7 · 22:00h
+    - cron: '30 22 7 7 *'  # Octavos partido 8 · 01:00h
+    - cron: '30 19 10 7 *'  # Cuartos partido 1 · 22:00h
+    - cron: '30 22 10 7 *'  # Cuartos partido 2 · 01:00h
+    - cron: '30 16 11 7 *'  # Cuartos partido 3 · 19:00h
+    - cron: '30 21 11 7 *'  # Cuartos partido 4 · 00:00h
+    - cron: '30 19 14 7 *'  # Semifinal 1 · 22:00h
+    - cron: '30 19 15 7 *'  # Semifinal 2 · 22:00h
+    - cron: '30 19 18 7 *'  # Tercer puesto · 22:00h
+    - cron: '30 19 19 7 *'  # FINAL 🏆 · 22:00h
+
+  workflow_dispatch:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detectar partido y enviar mensaje
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python3 - <<'EOF'
+import os, urllib.request, urllib.parse, json, subprocess
+from datetime import datetime, timezone, timedelta
+
+TOKEN   = os.environ['TELEGRAM_TOKEN']
+CHAT_ID = os.environ['TELEGRAM_CHAT_ID']
+
+# Tabla de partidos: (utc_hora, utc_min, local, visit, fl, fv, hora_es, grupo, canal, espana)
+PARTIDOS = [
+  (6,11,19,0, 'México','Sudáfrica','🇲🇽','🇿🇦','21:00','11 de June','A','DAZN',False),
+  (6,12,2,0, 'Corea del Sur','Rep. Checa','🇰🇷','🇨🇿','04:00','12 de June','A','DAZN',False),
+  (6,18,16,0, 'Rep. Checa','Sudáfrica','🇨🇿','🇿🇦','18:00','18 de June','A','DAZN',False),
+  (6,19,1,0, 'México','Corea del Sur','🇲🇽','🇰🇷','03:00','19 de June','A','DAZN',False),
+  (6,25,1,0, 'Rep. Checa','México','🇨🇿','🇲🇽','03:00','25 de June','A','DAZN',False),
+  (6,25,1,0, 'Sudáfrica','Corea del Sur','🇿🇦','🇰🇷','03:00','25 de June','A','DAZN',False),
+  (6,12,19,0, 'Canadá','Bosnia','🇨🇦','🇧🇦','21:00','12 de June','B','DAZN',False),
+  (6,13,19,0, 'Catar','Suiza','🇶🇦','🇨🇭','21:00','13 de June','B','DAZN',False),
+  (6,18,19,0, 'Suiza','Bosnia','🇨🇭','🇧🇦','21:00','18 de June','B','DAZN',False),
+  (6,18,22,0, 'Canadá','Catar','🇨🇦','🇶🇦','00:00','19 de June','B','DAZN',False),
+  (6,24,19,0, 'Suiza','Canadá','🇨🇭','🇨🇦','21:00','24 de June','B','DAZN',False),
+  (6,24,19,0, 'Bosnia','Catar','🇧🇦','🇶🇦','21:00','24 de June','B','DAZN',False),
+  (6,13,22,0, 'Brasil','Marruecos','🇧🇷','🇲🇦','00:00','14 de June','C','La 1',False),
+  (6,14,1,0, 'Haití','Escocia','🇭🇹','🏴\U000e0067\U000e0062\U000e0073\U000e0063\U000e0074\U000e007f','03:00','14 de June','C','DAZN',False),
+  (6,19,22,0, 'Brasil','Haití','🇧🇷','🇭🇹','00:00','20 de June','C','La 1',False),
+  (6,20,1,0, 'Escocia','Marruecos','🏴\U000e0067\U000e0062\U000e0073\U000e0063\U000e0074\U000e007f','🇲🇦','03:00','20 de June','C','DAZN',False),
+  (6,24,22,0, 'Escocia','Brasil','🏴\U000e0067\U000e0062\U000e0073\U000e0063\U000e0074\U000e007f','🇧🇷','00:00','25 de June','C','La 1',False),
+  (6,24,22,0, 'Marruecos','Haití','🇲🇦','🇭🇹','00:00','25 de June','C','DAZN',False),
+  (6,13,1,0, 'EE.UU.','Paraguay','🇺🇸','🇵🇾','03:00','13 de June','D','DAZN',False),
+  (6,13,4,0, 'Australia','Turquía','🇦🇺','🇹🇷','06:00','13 de June','D','DAZN',False),
+  (6,19,4,0, 'Turquía','Paraguay','🇹🇷','🇵🇾','06:00','19 de June','D','DAZN',False),
+  (6,19,19,0, 'EE.UU.','Australia','🇺🇸','🇦🇺','21:00','19 de June','D','DAZN',False),
+  (6,26,2,0, 'Turquía','EE.UU.','🇹🇷','🇺🇸','04:00','26 de June','D','DAZN',False),
+  (6,26,2,0, 'Paraguay','Australia','🇵🇾','🇦🇺','04:00','26 de June','D','DAZN',False),
+  (6,14,17,0, 'Alemania','Curazao','🇩🇪','🇨🇼','19:00','14 de June','E','La 1',False),
+  (6,14,23,0, 'C. de Marfil','Ecuador','🇨🇮','🇪🇨','01:00','15 de June','E','DAZN',False),
+  (6,20,22,0, 'Alemania','C. de Marfil','🇩🇪','🇨🇮','00:00','21 de June','E','La 1',False),
+  (6,21,0,0, 'Ecuador','Curazao','🇪🇨','🇨🇼','02:00','21 de June','E','DAZN',False),
+  (6,25,22,0, 'Ecuador','Alemania','🇪🇨','🇩🇪','00:00','26 de June','E','La 1',False),
+  (6,25,22,0, 'Curazao','C. de Marfil','🇨🇼','🇨🇮','00:00','26 de June','E','DAZN',False),
+  (6,14,22,0, 'Países Bajos','Japón','🇳🇱','🇯🇵','00:00','15 de June','F','La 1',False),
+  (6,15,2,0, 'Suecia','Túnez','🇸🇪','🇹🇳','04:00','15 de June','F','DAZN',False),
+  (6,20,17,0, 'Países Bajos','Suecia','🇳🇱','🇸🇪','19:00','20 de June','F','La 1',False),
+  (6,20,4,0, 'Túnez','Japón','🇹🇳','🇯🇵','06:00','20 de June','F','DAZN',False),
+  (6,25,23,0, 'Túnez','Países Bajos','🇹🇳','🇳🇱','01:00','26 de June','F','La 1',False),
+  (6,25,23,0, 'Japón','Suecia','🇯🇵','🇸🇪','01:00','26 de June','F','DAZN',False),
+  (6,15,19,0, 'Bélgica','Egipto','🇧🇪','🇪🇬','21:00','15 de June','G','La 1',False),
+  (6,16,1,0, 'Irán','Nueva Zelanda','🇮🇷','🇳🇿','03:00','16 de June','G','DAZN',False),
+  (6,21,23,0, 'Bélgica','Irán','🇧🇪','🇮🇷','01:00','22 de June','G','DAZN',False),
+  (6,22,1,0, 'Nueva Zelanda','Egipto','🇳🇿','🇪🇬','03:00','22 de June','G','DAZN',False),
+  (6,27,3,0, 'Nueva Zelanda','Bélgica','🇳🇿','🇧🇪','05:00','27 de June','G','DAZN',False),
+  (6,27,3,0, 'Egipto','Irán','🇪🇬','🇮🇷','05:00','27 de June','G','DAZN',False),
+  (6,15,16,0, 'España','Cabo Verde','🇪🇸','🇨🇻','18:00','15 de June','H','La 1',True),
+  (6,15,22,0, 'Arabia Saudí','Uruguay','🇸🇦','🇺🇾','00:00','16 de June','H','DAZN',False),
+  (6,21,16,0, 'España','Arabia Saudí','🇪🇸','🇸🇦','18:00','21 de June','H','La 1',True),
+  (6,21,22,0, 'Uruguay','Cabo Verde','🇺🇾','🇨🇻','00:00','22 de June','H','DAZN',False),
+  (6,27,0,0, 'Uruguay','España','🇺🇾','🇪🇸','02:00','27 de June','H','La 1',True),
+  (6,27,0,0, 'Cabo Verde','Arabia Saudí','🇨🇻','🇸🇦','02:00','27 de June','H','DAZN',False),
+  (6,16,19,0, 'Francia','Senegal','🇫🇷','🇸🇳','21:00','16 de June','I','La 1',False),
+  (6,16,22,0, 'Irak','Noruega','🇮🇶','🇳🇴','00:00','17 de June','I','DAZN',False),
+  (6,22,21,0, 'Francia','Irak','🇫🇷','🇮🇶','23:00','22 de June','I','La 1',False),
+  (6,23,0,0, 'Noruega','Senegal','🇳🇴','🇸🇳','02:00','23 de June','I','DAZN',False),
+  (6,26,19,0, 'Noruega','Francia','🇳🇴','🇫🇷','21:00','26 de June','I','La 1',False),
+  (6,26,19,0, 'Senegal','Irak','🇸🇳','🇮🇶','21:00','26 de June','I','DAZN',False),
+  (6,17,1,0, 'Argentina','Argelia','🇦🇷','🇩🇿','03:00','17 de June','J','La 1',False),
+  (6,17,4,0, 'Austria','Jordania','🇦🇹','🇯🇴','06:00','17 de June','J','DAZN',False),
+  (6,22,17,0, 'Argentina','Austria','🇦🇷','🇦🇹','19:00','22 de June','J','La 1',False),
+  (6,23,3,0, 'Jordania','Argelia','🇯🇴','🇩🇿','05:00','23 de June','J','DAZN',False),
+  (6,28,2,0, 'Jordania','Argentina','🇯🇴','🇦🇷','04:00','28 de June','J','La 1',False),
+  (6,28,2,0, 'Argelia','Austria','🇩🇿','🇦🇹','04:00','28 de June','J','DAZN',False),
+  (6,17,17,0, 'Portugal','RD Congo','🇵🇹','🇨🇩','19:00','17 de June','K','La 1',False),
+  (6,18,2,0, 'Uzbekistán','Colombia','🇺🇿','🇨🇴','04:00','18 de June','K','DAZN',False),
+  (6,23,17,0, 'Portugal','Uzbekistán','🇵🇹','🇺🇿','19:00','23 de June','K','La 1',False),
+  (6,24,2,0, 'Colombia','RD Congo','🇨🇴','🇨🇩','04:00','24 de June','K','DAZN',False),
+  (6,27,23,30, 'Colombia','Portugal','🇨🇴','🇵🇹','01:30','28 de June','K','La 1',False),
+  (6,27,23,30, 'RD Congo','Uzbekistán','🇨🇩','🇺🇿','01:30','28 de June','K','DAZN',False),
+  (6,17,20,0, 'Inglaterra','Croacia','🏴\U000e0067\U000e0062\U000e0065\U000e006e\U000e0067\U000e007f','🇭🇷','22:00','17 de June','L','La 1',False),
+  (6,17,23,0, 'Ghana','Panamá','🇬🇭','🇵🇦','01:00','18 de June','L','DAZN',False),
+  (6,23,20,0, 'Inglaterra','Ghana','🏴\U000e0067\U000e0062\U000e0065\U000e006e\U000e0067\U000e007f','🇬🇭','22:00','23 de June','L','La 1',False),
+  (6,23,23,0, 'Panamá','Croacia','🇵🇦','🇭🇷','01:00','24 de June','L','DAZN',False),
+  (6,27,21,0, 'Croacia','Inglaterra','🇭🇷','🏴\U000e0067\U000e0062\U000e0065\U000e006e\U000e0067\U000e007f','23:00','27 de June','L','La 1',False),
+  (6,27,21,0, 'Panamá','Ghana','🇵🇦','🇬🇭','23:00','27 de June','L','DAZN',False),
+  (6,29,17,0, 'Dieciseisavos partido 1','—','⚽','⚽','19:00','29 de June','—','La 1',False),
+  (6,29,20,0, 'Dieciseisavos partido 2','—','⚽','⚽','22:00','29 de June','—','La 1',False),
+  (6,29,23,0, 'Dieciseisavos partido 3','—','⚽','⚽','01:00','30 de June','—','La 1',False),
+  (6,30,20,0, 'Dieciseisavos partido 4','—','⚽','⚽','22:00','30 de June','—','La 1',False),
+  (6,30,23,0, 'Dieciseisavos partido 5','—','⚽','⚽','01:00','1 de July','—','La 1',False),
+  (7,1,17,0, 'Dieciseisavos partido 6','—','⚽','⚽','19:00','1 de July','—','La 1',False),
+  (7,1,20,0, 'Dieciseisavos partido 7','—','⚽','⚽','22:00','1 de July','—','La 1',False),
+  (7,1,23,0, 'Dieciseisavos partido 8','—','⚽','⚽','01:00','2 de July','—','La 1',False),
+  (7,2,17,0, 'Dieciseisavos partido 9','—','⚽','⚽','19:00','2 de July','—','La 1',False),
+  (7,2,20,0, 'Dieciseisavos partido 10','—','⚽','⚽','22:00','2 de July','—','La 1',False),
+  (7,2,23,0, 'Dieciseisavos partido 11','—','⚽','⚽','01:00','3 de July','—','La 1',False),
+  (7,3,17,0, 'Dieciseisavos partido 12','—','⚽','⚽','19:00','3 de July','—','La 1',False),
+  (7,3,20,0, 'Dieciseisavos partido 13','—','⚽','⚽','22:00','3 de July','—','La 1',False),
+  (7,3,23,0, 'Dieciseisavos partido 14','—','⚽','⚽','01:00','4 de July','—','La 1',False),
+  (7,4,17,0, 'Dieciseisavos partido 15','—','⚽','⚽','19:00','4 de July','—','La 1',False),
+  (7,4,20,0, 'Dieciseisavos partido 16','—','⚽','⚽','22:00','4 de July','—','La 1',False),
+  (7,5,20,0, 'Octavos partido 1','—','⚽','⚽','22:00','5 de July','—','La 1',False),
+  (7,5,23,0, 'Octavos partido 2','—','⚽','⚽','01:00','6 de July','—','La 1',False),
+  (7,6,17,0, 'Octavos partido 3','—','⚽','⚽','19:00','6 de July','—','La 1',False),
+  (7,6,20,0, 'Octavos partido 4','—','⚽','⚽','22:00','6 de July','—','La 1',False),
+  (7,6,23,0, 'Octavos partido 5','—','⚽','⚽','01:00','7 de July','—','La 1',False),
+  (7,7,17,0, 'Octavos partido 6','—','⚽','⚽','19:00','7 de July','—','La 1',False),
+  (7,7,20,0, 'Octavos partido 7','—','⚽','⚽','22:00','7 de July','—','La 1',False),
+  (7,7,23,0, 'Octavos partido 8','—','⚽','⚽','01:00','8 de July','—','La 1',False),
+  (7,10,20,0, 'Cuartos partido 1','—','⚽','⚽','22:00','10 de July','—','La 1',False),
+  (7,10,23,0, 'Cuartos partido 2','—','⚽','⚽','01:00','11 de July','—','La 1',False),
+  (7,11,17,0, 'Cuartos partido 3','—','⚽','⚽','19:00','11 de July','—','La 1',False),
+  (7,11,22,0, 'Cuartos partido 4','—','⚽','⚽','00:00','12 de July','—','La 1',False),
+  (7,14,20,0, 'Semifinal 1','—','⚽','⚽','22:00','14 de July','—','La 1',False),
+  (7,15,20,0, 'Semifinal 2','—','⚽','⚽','22:00','15 de July','—','La 1',False),
+  (7,18,20,0, 'Tercer puesto','—','⚽','⚽','22:00','18 de July','—','La 1',False),
+  (7,19,20,0, 'FINAL 🏆','—','⚽','⚽','22:00','19 de July','—','La 1',False),
+]
+
+now = datetime.now(timezone.utc)
+match = None
+for m,d,h,mi,local,visit,fl,fv,hora_es,fecha,grupo,canal,espana in PARTIDOS:
+    if now.month==m and now.day==d and abs((now.hour*60+now.minute)-(h*60+mi))<=35:
+        match=(local,visit,fl,fv,hora_es,fecha,grupo,canal,espana)
+        break
+
+if not match:
+    print('No se encontró partido para este momento.')
+    exit(0)
+
+local,visit,fl,fv,hora_es,fecha,grupo,canal,espana = match
+espana_line = '\n🇪🇸 <b>¡PARTIDO DE ESPAÑA!</b>' if espana else ''
+if visit == '—':
+    titulo = f'⚽ {local}'
+else:
+    titulo = f'⚽ {fl} {local}  vs  {fv} {visit}'
+msg = f'''🏆 <b>Mundial 2026</b>{espana_line}
+
+{titulo}
+
+🕐 Hoy a las <b>{hora_es}h</b> (hora española)
+📺 Canal: <b>{canal}</b>
+📅 {fecha} · Grupo {grupo}
+
+¡Empieza en 30 minutos! 🔥'''
+
+url  = f'https://api.telegram.org/bot{TOKEN}/sendMessage'
+data = urllib.parse.urlencode({'chat_id':CHAT_ID,'text':msg,'parse_mode':'HTML'}).encode()
+req  = urllib.request.Request(url,data=data,method='POST')
+with urllib.request.urlopen(req) as r:
+    resp = json.loads(r.read())
+print('ok' if resp.get('ok') else resp)
+EOF
