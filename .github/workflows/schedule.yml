@@ -111,8 +111,8 @@ on:
     - cron: '30 19 19 7 *'  # FINAL 🏆 · 22:00h
 
     # --- PRUEBAS (borrar después) ---
-    - cron: '20 6 2 6 *'   # 🧪 TEST aviso 24h — partido mañana 08:20h
-    - cron: '30 6 2 6 *'   # 🧪 TEST aviso 30min — partido hoy 09:00h
+    - cron: '20 9 2 6 *'   # 🧪 TEST aviso 24h — dispara 11:20h española
+    - cron: '22 9 2 6 *'   # 🧪 TEST aviso 30min — dispara 11:22h española
     # --------------------------------
 
   workflow_dispatch:
@@ -242,8 +242,8 @@ PARTIDOS = [
   (7,18,20,0, 'Tercer puesto','—','⚽','⚽','22:00','18 de July','—','La 1',False),
   (7,19,20,0, 'FINAL 🏆','—','⚽','⚽','22:00','19 de July','—','La 1',False),
   # --- PRUEBAS (borrar después) ---
-  (6,3,6,20, 'España','Prueba TEST','🇪🇸','🧪','08:20','3 de June','TEST','La 1',True),
-  (6,2,7,0,  'Brasil','Prueba TEST','🇧🇷','🧪','09:00','2 de June','TEST','La 1',False),
+  (6,3,9,20, 'España','Prueba TEST','🇪🇸','🧪','09:46','3 de June','TEST','La 1',True),
+  (6,2,9,52, 'Brasil','Prueba TEST','🇧🇷','🧪','10:18','2 de June','TEST','La 1',False),
   # --------------------------------
 ]
 
