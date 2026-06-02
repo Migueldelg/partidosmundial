@@ -99,8 +99,8 @@ on:
     - cron: '30 19 19 7 *'  # FINAL
 
     # --- PRUEBAS (borrar después) ---
-    - cron: '30 9 2 6 *'   # TEST aviso 24h — 11:30h española
-    - cron: '32 9 2 6 *'   # TEST aviso 30min — 11:32h española
+    - cron: '40 9 2 6 *'   # TEST aviso 24h — 11:40h española
+    - cron: '42 9 2 6 *'   # TEST aviso 30min — 11:42h española
     # --------------------------------
 
   workflow_dispatch:
@@ -229,8 +229,8 @@ jobs:
             (7,18,20,0,'Tercer puesto','—','⚽','⚽','22:00','18 de julio','—','La 1',False),
             (7,19,20,0,'FINAL','—','⚽','⚽','22:00','19 de julio','—','La 1',False),
             # PRUEBAS
-            (6,3,9,30,'España','Prueba TEST','🇪🇸','🧪','11:30','3 de junio','TEST','La 1',True),
-            (6,2,10,2,'Brasil','Prueba TEST','🇧🇷','🧪','12:02','2 de junio','TEST','La 1',False),
+            (6,3,9,40,'España','Prueba TEST','🇪🇸','🧪','11:30','3 de junio','TEST','La 1',True),
+            (6,2,10,12,'Brasil','Prueba TEST','🇧🇷','🧪','12:02','2 de junio','TEST','La 1',False),
           ]
 
           now = datetime.now(timezone.utc)
