@@ -232,6 +232,8 @@ jobs:
             (7,19,20,0,'FINAL','—','⚽','⚽','22:00','19 de julio','—','La 1',False),
           ]
 
+          CANAL_ICON = {'La 1': '🔴', 'DAZN': '🟢'}
+
           now = datetime.now(timezone.utc)
 
           # Mensaje especial de inauguración (10 junio 19:00 UTC)
@@ -260,11 +262,11 @@ jobs:
             hoy_cest = (now + timedelta(hours=2)).date()
 
             partidos_hoy = []
-            for m,d,h,mi,local,visit,fl,fv,hora_es,fecha,grupo,canal,espana in PARTIDOS:
+            for m,d,h,mi,local,visit,fl,fv,hora_es,fecha,grupo,canal_raw,espana in PARTIDOS:
               match_utc = datetime(now.year, m, d, h, mi, tzinfo=timezone.utc)
               match_cest_date = (match_utc + timedelta(hours=2)).date()
               if match_cest_date == hoy_cest:
-                partidos_hoy.append((hora_es, fl, local, fv, visit, grupo, canal, espana))
+                partidos_hoy.append((hora_es, fl, local, fv, visit, grupo, canal_raw, espana))
 
             if not partidos_hoy:
               print('Sin partidos hoy, no se envía resumen.')
@@ -276,12 +278,13 @@ jobs:
             }[now.month]
 
             lineas = []
-            for hora_es, fl, local, fv, visit, grupo, canal, espana in partidos_hoy:
+            for hora_es, fl, local, fv, visit, grupo, canal_raw, espana in partidos_hoy:
               marca_esp = ' 🇪🇸' if espana else ''
+              icono = CANAL_ICON.get(canal_raw, canal_raw)
               if visit == '—':
-                lineas.append(f'⚽ <b>{hora_es}h</b> — {local}{marca_esp}  ({canal})')
+                lineas.append(f'⚽ <b>{hora_es}h</b> — {local}{marca_esp}  {icono}')
               else:
-                lineas.append(f'⚽ <b>{hora_es}h</b> — {fl} {local} vs {fv} {visit}{marca_esp}  · Grupo {grupo} · {canal}')
+                lineas.append(f'⚽ <b>{hora_es}h</b> — {fl} {local} vs {fv} {visit}{marca_esp}  · Grupo {grupo} · {icono}')
 
             msg = (
               f'🏆 <b>Mundial 2026 — Partidos de hoy</b>\n'
@@ -301,15 +304,15 @@ jobs:
           match = None
           aviso_24h = False
 
-          for m,d,h,mi,local,visit,fl,fv,hora_es,fecha,grupo,canal,espana in PARTIDOS:
+          for m,d,h,mi,local,visit,fl,fv,hora_es,fecha,grupo,canal_raw,espana in PARTIDOS:
             match_dt = datetime(now.year, m, d, h, mi, tzinfo=timezone.utc)
             delta = (match_dt - now).total_seconds() / 60
             if 5 <= delta <= 65:
-              match = (local,visit,fl,fv,hora_es,fecha,grupo,canal,espana)
+              match = (local,visit,fl,fv,hora_es,fecha,grupo,canal_raw,espana)
               aviso_24h = False
               break
             elif espana and 23*60+25 <= delta <= 24*60+35:
-              match = (local,visit,fl,fv,hora_es,fecha,grupo,canal,espana)
+              match = (local,visit,fl,fv,hora_es,fecha,grupo,canal_raw,espana)
               aviso_24h = True
               break
 
@@ -317,7 +320,7 @@ jobs:
             print('No se encontro partido para este momento.')
             exit(0)
 
-          local,visit,fl,fv,hora_es,fecha,grupo,canal,espana = match
+          local,visit,fl,fv,hora_es,fecha,grupo,canal_raw,espana = match
           titulo = f'⚽ {local}' if visit == '—' else f'⚽ {fl} {local}  vs  {fv} {visit}'
 
           if aviso_24h:
@@ -326,7 +329,7 @@ jobs:
               '🇪🇸 <b>¡MAÑANA JUEGA ESPAÑA!</b>\n\n'
               f'{titulo}\n\n'
               f'🕐 Mañana a las <b>{hora_es}h</b> (hora española)\n'
-              f'📺 Canal: <b>{canal}</b>\n'
+              f'📺 {CANAL_ICON.get(canal_raw, canal_raw)}\n'
               f'📅 {fecha} · Grupo {grupo}\n\n'
               '<b>¡Prepárate! 🔥</b>'
             )
@@ -336,7 +339,7 @@ jobs:
               f'🏆 <b>Mundial 2026</b>{espana_line}\n\n'
               f'{titulo}\n\n'
               f'🕐 Hoy a las <b>{hora_es}h</b> (hora española)\n'
-              f'📺 Canal: <b>{canal}</b>\n'
+              f'📺 {CANAL_ICON.get(canal_raw, canal_raw)}\n'
               f'📅 {fecha} · Grupo {grupo}\n\n'
               '<b>¡Empieza en 30 minutos! 🔥</b>'
             )
