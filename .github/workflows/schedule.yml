@@ -102,6 +102,7 @@ on:
     - cron: '0 19 10 6 *'   # Inauguración — aviso día antes 21:00h española
 
     - cron: '0 5 3 6 *'    # TEST — simulación primer partido
+    - cron: '0 7 * * *'    # Resumen diario — 9:00h española (CEST)
 
   workflow_dispatch:
 
@@ -252,6 +253,50 @@ jobs:
               resp = json.loads(r.read())
             print('ok' if resp.get('ok') else resp)
             exit(0)
+
+          # ── Resumen diario (9:00h española = 7:00 UTC) ──────────────────
+          if now.hour == 7 and now.minute < 30:
+            from datetime import timedelta
+            hoy_cest = (now + timedelta(hours=2)).date()
+
+            partidos_hoy = []
+            for m,d,h,mi,local,visit,fl,fv,hora_es,fecha,grupo,canal,espana in PARTIDOS:
+              match_utc = datetime(now.year, m, d, h, mi, tzinfo=timezone.utc)
+              match_cest_date = (match_utc + timedelta(hours=2)).date()
+              if match_cest_date == hoy_cest:
+                partidos_hoy.append((hora_es, fl, local, fv, visit, grupo, canal, espana))
+
+            if not partidos_hoy:
+              print('Sin partidos hoy, no se envía resumen.')
+              exit(0)
+
+            fecha_str = now.strftime('%-d de') + {
+              1:'enero',2:'febrero',3:'marzo',4:'abril',5:'mayo',6:'junio',
+              7:'julio',8:'agosto',9:'septiembre',10:'octubre',11:'noviembre',12:'diciembre'
+            }[now.month]
+
+            lineas = []
+            for hora_es, fl, local, fv, visit, grupo, canal, espana in partidos_hoy:
+              marca_esp = ' 🇪🇸' if espana else ''
+              if visit == '—':
+                lineas.append(f'⚽ <b>{hora_es}h</b> — {local}{marca_esp}  ({canal})')
+              else:
+                lineas.append(f'⚽ <b>{hora_es}h</b> — {fl} {local} vs {fv} {visit}{marca_esp}  · Grupo {grupo} · {canal}')
+
+            msg = (
+              f'🏆 <b>Mundial 2026 — Partidos de hoy</b>\n'
+              f'📅 {fecha_str}\n\n'
+              + '\n'.join(lineas) +
+              '\n\n<i>¡Que empiece el fútbol! ⚽</i>'
+            )
+            url  = f'https://api.telegram.org/bot{TOKEN}/sendMessage'
+            data = urllib.parse.urlencode({'chat_id':CHAT_ID,'text':msg,'parse_mode':'HTML'}).encode()
+            req  = urllib.request.Request(url,data=data,method='POST')
+            with urllib.request.urlopen(req) as r:
+              resp = json.loads(r.read())
+            print('ok' if resp.get('ok') else resp)
+            exit(0)
+          # ────────────────────────────────────────────────────────────────
 
           match = None
           aviso_24h = False
