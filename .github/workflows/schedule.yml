@@ -102,7 +102,7 @@ on:
     - cron: '0 19 10 6 *'   # Inauguración — aviso día antes 21:00h española
 
     - cron: '0 5 3 6 *'    # TEST — simulación primer partido
-    - cron: '0 7 * * *'    # Resumen diario — 9:00h española (CEST)
+    - cron: '0 8 * * *'    # Resumen diario — 10:00h española (CEST)
 
   workflow_dispatch:
 
@@ -255,7 +255,7 @@ jobs:
             exit(0)
 
           # ── Resumen diario (9:00h española = 7:00 UTC) ──────────────────
-          if now.hour == 7 and now.minute < 30:
+          if now.hour == 8 and now.minute < 30:
             from datetime import timedelta
             hoy_cest = (now + timedelta(hours=2)).date()
 
