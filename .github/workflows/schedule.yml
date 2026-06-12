@@ -307,7 +307,7 @@ jobs:
           for m,d,h,mi,local,visit,fl,fv,hora_es,fecha,grupo,canal_raw,espana in PARTIDOS:
             match_dt = datetime(now.year, m, d, h, mi, tzinfo=timezone.utc)
             delta = (match_dt - now).total_seconds() / 60
-            if 5 <= delta <= 65:
+            if -30 <= delta <= 65:
               match = (local,visit,fl,fv,hora_es,fecha,grupo,canal_raw,espana)
               aviso_24h = False
               break
@@ -322,6 +322,14 @@ jobs:
 
           local,visit,fl,fv,hora_es,fecha,grupo,canal_raw,espana = match
           titulo = f'⚽ {local}' if visit == '—' else f'⚽ {fl} {local}  vs  {fv} {visit}'
+
+          # Calcular texto de tiempo restante real (GitHub Actions puede tener delay)
+          if delta <= 0:
+            tiempo_txt = '¡Está empezando ahora! ⏰🔥'
+          elif delta < 10:
+            tiempo_txt = f'¡Empieza en {int(delta)} minutos! ⏰🔥'
+          else:
+            tiempo_txt = f'¡Empieza en {int(delta)} minutos! 🔥'
 
           if aviso_24h:
             msg = (
@@ -341,7 +349,7 @@ jobs:
               f'🕐 Hoy a las <b>{hora_es}h</b> (hora española)\n'
               f'📺 {CANAL_ICON.get(canal_raw, canal_raw)}\n'
               f'📅 {fecha} · Grupo {grupo}\n\n'
-              '<b>¡Empieza en 30 minutos! 🔥</b>'
+              f'<b>{tiempo_txt}</b>'
             )
 
           url  = f'https://api.telegram.org/bot{TOKEN}/sendMessage'
