@@ -272,25 +272,50 @@ jobs:
               print('Sin partidos hoy, no se envía resumen.')
               exit(0)
 
-            fecha_str = now.strftime('%-d de') + {
-              1:'enero',2:'febrero',3:'marzo',4:'abril',5:'mayo',6:'junio',
-              7:'julio',8:'agosto',9:'septiembre',10:'octubre',11:'noviembre',12:'diciembre'
-            }[now.month]
+            meses = {1:'enero',2:'febrero',3:'marzo',4:'abril',5:'mayo',6:'junio',
+              7:'julio',8:'agosto',9:'septiembre',10:'octubre',11:'noviembre',12:'diciembre'}
+            fecha_str = f'{now.day} de {meses[now.month]}'
 
             lineas = []
+            hay_espana = False
+            nombres_partidos = []
             for hora_es, fl, local, fv, visit, grupo, canal_raw, espana in partidos_hoy:
+              if espana: hay_espana = True
               marca_esp = ' 🇪🇸' if espana else ''
-              icono = CANAL_ICON.get(canal_raw, canal_raw)
+              icono = f'{CANAL_ICON.get(canal_raw, "")} {canal_raw}'.strip()
               if visit == '—':
                 lineas.append(f'⚽ <b>{hora_es}h</b> — {local}{marca_esp}  {icono}')
+                nombres_partidos.append(local)
               else:
                 lineas.append(f'⚽ <b>{hora_es}h</b> — {fl} {local} vs {fv} {visit}{marca_esp}  · Grupo {grupo} · {icono}')
+                nombres_partidos.append(f'{local} vs {visit}')
+
+            n = len(partidos_hoy)
+            nombres_str = ' '.join(nombres_partidos)
+            if 'FINAL' in nombres_str and 'Semifinal' not in nombres_str:
+              cierre = '🏆 ¡Hoy se decide el campeón del mundo! No te lo pierdas.'
+            elif 'Semifinal' in nombres_str:
+              cierre = '🔥 ¡Semifinales! Los mejores cuatro equipos del mundo se juegan el todo.'
+            elif 'Cuartos' in nombres_str:
+              cierre = '⚔️ ¡Cuartos de final! El Mundial se pone serio.'
+            elif 'Octavos' in nombres_str:
+              cierre = '💥 ¡Octavos de final! Empieza el KO directo.'
+            elif 'Dieciseisavos' in nombres_str:
+              cierre = '🎯 ¡Ronda de 32! El torneo entra en fase eliminatoria.'
+            elif hay_espana:
+              cierre = '🇪🇸 ¡Hoy juega España! Prepara las palomitas. 🔥'
+            elif n == 1:
+              cierre = f'Solo un partido hoy, pero hay que verlo. ⚽'
+            elif n >= 4:
+              cierre = f'¡{n} partidos hoy! Que no se te escape ninguno. ⚽'
+            else:
+              cierre = '¡Que empiece el fútbol! ⚽'
 
             msg = (
               f'🏆 <b>Mundial 2026 — Partidos de hoy</b>\n'
               f'📅 {fecha_str}\n\n'
               + '\n'.join(lineas) +
-              '\n\n<i>¡Que empiece el fútbol! ⚽</i>'
+              f'\n\n<i>{cierre}</i>'
             )
             url  = f'https://api.telegram.org/bot{TOKEN}/sendMessage'
             data = urllib.parse.urlencode({'chat_id':CHAT_ID,'text':msg,'parse_mode':'HTML'}).encode()
